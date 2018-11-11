@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array-methods</title>
+</head>
+
+<body>
+    <a href="https://learn.javascript.ru/array-methods">Статья</a>
+    <script>
+        // Добавить класс в строку
+        function addClass(obj, cls) {
+            let classList = obj['className'] ? obj['className'].split(' ') : [];
+            if (classList.indexOf(cls) == -1) {
+                classList.push(cls);
+                obj['className'] = classList.join(' ');
+            }
+        }
+        var obj = {
+            className: 'open menu'
+        }
+        addClass(obj, 'new'); // obj.className='open menu new'
+        addClass(obj, 'open'); // без изменений (класс уже существует)
+        addClass(obj, 'me'); // obj.className='open menu new me'
+
+        // alert( obj.className ); // "open menu new me"
+
+
+        // Перевести текст вида border-left-width в borderLeftWidth
+        function camelize(str) {
+            let list = str.split('-');
+            for (let i = 1; i < list.length; i++) {
+                list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1);
+            }
+            return list.join('');
+        }
+        // alert(camelize("background-color"));
+        // alert(camelize("list-style-image"));
+        // alert(camelize("-webkit-transition"));
+
+
+        // Функция removeClass
+        function removeClass(obj, cls) {
+            let classList = obj['className'] ? obj['className'].split(' ') : [];
+
+            for (let i = 0; i < classList.length; i++) {
+                if (classList[i] == cls) {
+                    classList.splice(i, 1);
+                    i--;
+                }
+            }
+            obj['className'] = classList.join(' ');
+            alert(obj.className);
+        }
+        var obj = {
+            className: 'my menu menu'
+        }; 
+        // removeClass(obj, 'menu');
+
+
+        // Фильтрация массива "на месте"
+        function filterRangeInPlace(arr, a, b) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] < a || arr[i] > b) {
+                    arr.splice(i, 1);
+                }
+            }
+        }
+        arr = [5, 3, 8, 1];
+        filterRangeInPlace(arr, 1, 4);
+        // alert( arr );
+    </script>
+</body>
+
+</html>
