@@ -1,18 +1,18 @@
 // Создайте калькулятор
 var calculator = {
-    sum: function() {
+    sum() {
         return this.a + this.b;
     },
   
-    mul: function() {
+    mul() {
         return this.a * this.b;
     },
   
-    read: function() {
+    read() {
         this.a = +prompt('a?', 0);
         this.b = +prompt('b?', 0);
     }
-}
+};
 
 // calculator.read();
 // alert( calculator.sum() );
@@ -22,15 +22,15 @@ var calculator = {
 // Цепочка вызовов
 var ladder = {
     step: 0,
-    up: function() { // вверх по лестнице
+    up() { // вверх по лестнице
         this.step++;
         return this;
     },
-    down: function() { // вниз по лестнице
+    down() { // вниз по лестнице
         this.step--;
         return this;
     },
-    showStep: function() { // вывести текущую ступеньку
+    showStep() { // вывести текущую ступеньку
         alert( this.step );
         return this;
     }

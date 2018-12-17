@@ -4,14 +4,14 @@ function Calculator() {
         return this.a + this.b;
     },
 
-        this.mul = function () {
-            return this.a * this.b;
-        },
+    this.mul = function () {
+        return this.a * this.b;
+    },
 
-        this.read = function () {
-            this.a = +prompt('a?', 0);
-            this.b = +prompt('b?', 0);
-        }
+    this.read = function () {
+        this.a = +prompt('a?', 0);
+        this.b = +prompt('b?', 0);
+    }
 }
 
 // var calculator = new Calculator();
@@ -26,7 +26,7 @@ function Accumulator(startingValue) {
     this.value = startingValue;
 
     this.read = function () {
-        this.value += +prompt('Добавьте значение', 0);
+        this.value += Number(prompt('Добавьте значение', 0));
     }
 }
 
@@ -77,8 +77,8 @@ powerCalc.addMethod("**", function (a, b) {
     return Math.pow(a, b);
 });
 
-var result = powerCalc.calculate("2 ** 3");
-alert(result); // 8
+// var result = powerCalc.calculate("2 ** 3");
+// alert(result); // 8
 
 // var calc = new Calculator;
 // alert( calc.calculate("3 + 7") ); // 10

@@ -8,6 +8,19 @@ function sum_interface() {
 }
 
 
+// Repeat until the input is a number
+function readNumber() {
+    while (true) {
+        let num = prompt('Enter a number: ', 0);
+        if (num === null || num === '')
+            return null;
+        else if (isFinite(num))
+            return Number(num);
+    }
+}
+alert(`Read: ${readNumber()}`);
+
+
 // Сложение цен
 function adding() {
     alert(0.1 + 0.2 + '$');
@@ -43,4 +56,4 @@ function randInt(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
 }
-console.log(randInt(5, 10));
+// console.log(randInt(5, 10));
