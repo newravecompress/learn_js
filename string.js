@@ -1,6 +1,9 @@
 // Сделать первый символ заглавным
 function ucFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    if (!str) return str;
+    return str[0].toUpperCase() + str.slice(1);
+
+    // return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 
@@ -11,12 +14,9 @@ function checkSpam(str) {
         return false;
     }
     return true;
-}
-// Короткий вариант:
-function checkSpam(str) {
-    var lowerStr = str.toLowerCase();
 
-    return !!(~lowerStr.indexOf('viagra') || ~lowerStr.indexOf('xxx'));
+    // let lowerStr = str.toLowerCase();
+    // return lowerStr.includes('viagra') || lowerStr.includes('xxx');
 }
 
 
@@ -31,6 +31,5 @@ function truncate(str, maxlength) {
 
 // Выделить число
 function extractCurrencyValue(str) {
-    return str.slice(1);
+    return Number(str.slice(1));
 }
-console.log(truncate("Всем привет!", 20));

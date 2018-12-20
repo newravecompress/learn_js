@@ -32,8 +32,8 @@ function calc() {
     while (true) {
         let num = prompt('Введите число:', 0);
         if (!isNumeric(num)) {
-            for (let i = 0; i < numbers.length; i++) {
-                sum += numbers[i];
+            for (let num of numbers) {
+                sum += num;
             }
             alert(sum);
             break;
@@ -42,6 +42,25 @@ function calc() {
     }
 }
 // calc();
+
+function sumInput() {
+    let numbers = [];
+
+    while (true) {
+        let value = prompt("A number please?", 0);
+        // should we cancel?
+        if (value === "" || value === null || !isFinite(value)) break;
+        numbers.push(+value);
+    }
+
+    let sum = 0;
+    for (let number of numbers) {
+        sum += number;
+    }
+    return sum;
+}
+
+// alert(sumInput());
 
 
 // Поиск в массиве

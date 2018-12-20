@@ -6,12 +6,12 @@ function addClass(obj, cls) {
         obj['className'] = classList.join(' ');
     }
 }
-var obj = {
-    className: 'open menu'
-}
-addClass(obj, 'new'); // obj.className='open menu new'
-addClass(obj, 'open'); // без изменений (класс уже существует)
-addClass(obj, 'me'); // obj.className='open menu new me'
+// var obj = {
+//     className: 'open menu'
+// }
+// addClass(obj, 'new'); // obj.className='open menu new'
+// addClass(obj, 'open'); // без изменений (класс уже существует)
+// addClass(obj, 'me'); // obj.className='open menu new me'
 
 // alert( obj.className ); // "open menu new me"
 
@@ -23,6 +23,15 @@ function camelize(str) {
         list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1);
     }
     return list.join('');
+}
+// Другой вариант
+function camelize(str) {
+    return str
+        .split('-') // my-long-word -> ['my', 'long', 'word']
+        .map(
+            (word, index) => index == 0 ? word : word[0].toUpperCase() + word.slice(1)
+        ) // ['my', 'long', 'word'] -> ['my', 'Long', 'Word']
+        .join(''); // ['my', 'Long', 'Word'] -> myLongWord
 }
 // alert(camelize("background-color"));
 // alert(camelize("list-style-image"));
@@ -42,10 +51,21 @@ function removeClass(obj, cls) {
     obj['className'] = classList.join(' ');
     alert(obj.className);
 }
-var obj = {
-    className: 'my menu menu'
-};
+// var obj = {
+//     className: 'my menu menu'
+// };
 // removeClass(obj, 'menu');
+
+
+// Filter range
+function filterRange(arr, a, b) {
+    return arr.filter(item => item >= a && item <= b)
+}
+// let arr = [5, 3, 8, 1];
+// let filtered = filterRange(arr, 1, 4);
+// alert(filtered); // 3,1 (matching values)
+// alert(arr); // 5,3,8,1 (not modified)
+
 
 
 // Фильтрация массива "на месте"
@@ -53,51 +73,142 @@ function filterRangeInPlace(arr, a, b) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] < a || arr[i] > b) {
             arr.splice(i, 1);
+            i--;
         }
     }
 }
-arr = [5, 3, 8, 1];
-filterRangeInPlace(arr, 1, 4);
+// arr = [5, 3, 8, 1];
+// filterRangeInPlace(arr, 1, 4);
 // alert( arr );
 
 
 // Сортировать в обратном порядке
-var arr = [5, 2, 1, -10, 8];
-// alert(arr.sort((a, b) => {return b - a}))
+// var arr = [5, 2, 1, -10, 8];
+// alert(arr.sort((a, b) =>  b - a))
 
 
 // Скопировать и отсортировать массив
-var arr = ["HTML", "JavaScript", "CSS"];
+// var arr = ["HTML", "JavaScript", "CSS"];
 function arrSorted(arr) {
-    let newArr = [];
-    for (let i = 0; i < arr.length; i++) {
-        newArr[i] = arr[i];
-    }
-
-    return newArr.sort();
+    return arr.slice().sort();
 }
 // alert( arrSorted(arr) ); // CSS, HTML, JavaScript
 // alert( arr ); // HTML, JavaScript, CSS (без изменений)
 // Короткий вариант: 
-var arrSorted = arr.slice().sort();
+// var arrSorted = arr.slice().sort();
+
+
+// Create an extendable calculator
+function Calculator() {
+    var methods = {
+        "-": function (a, b) {
+            return a - b;
+        },
+        "+": function (a, b) {
+            return a + b;
+        }
+    };
+
+    this.calculate = function (str) {
+
+        var split = str.split(' '),
+            a = +split[0],
+            op = split[1],
+            b = +split[2]
+
+        if (!methods[op] || isNaN(a) || isNaN(b)) {
+            return NaN;
+        }
+
+        return methods[op](a, b);
+    }
+
+    this.addMethod = function (name, func) {
+        methods[name] = func;
+    };
+}
+
+var powerCalc = new Calculator;
+powerCalc.addMethod("*", function (a, b) {
+    return a * b;
+});
+powerCalc.addMethod("/", function (a, b) {
+    return a / b;
+});
+powerCalc.addMethod("**", function (a, b) {
+    return Math.pow(a, b);
+});
+
+
+// Map to names
+// let john = { name: "John", age: 25 };
+// let pete = { name: "Pete", age: 30 };
+// let mary = { name: "Mary", age: 28 };
+// let users = [john, pete, mary];
+// let names = users.map(item => item.name);
+// // alert( names ); // John, Pete, Mary
+
+
+// Map to objects
+// let john = { name: "John", surname: "Smith", id: 1 };
+// let pete = { name: "Pete", surname: "Hunt", id: 2 };
+// let mary = { name: "Mary", surname: "Key", id: 3 };
+// let users = [john, pete, mary];
+// let usersMapped = users.map(item => ({
+//     fullName: `${item.name} ${item.surname}`,
+//     id: item.id
+// }));
+// /*
+// usersMapped = [
+//   { fullName: "John Smith", id: 1 },
+//   { fullName: "Pete Hunt", id: 2 },
+//   { fullName: "Mary Key", id: 3 }
+// ]
+// */
+// alert(usersMapped[0].id) // 1
+// alert(usersMapped[0].fullName) // John Smith
+
+
+// Sort objects
+// function sortByName(arr) {
+//     arr.sort((a, b) => (b.name > a.name ? 1 : -1));
+// }
+// let john = { name: "John", age: 25 };
+// let pete = { name: "Pete", age: 30 };
+// let mary = { name: "Mary", age: 28 };
+// let arr = [ john, pete, mary ];
+// sortByName(arr);
+// // now: [john, mary, pete]
+// alert(arr[1].name); // Mary
 
 
 // Случайный порядок в массиве
-var arr = [1, 2, 3, 4, 5];
-arr.sort((a, b) => { return Math.random() - 0.5; });
+// var arr = [1, 2, 3, 4, 5];
+// arr.sort(() => { return Math.random() - 0.5; });
 // alert( arr );
 
 
+// Get average age
+// function getAverageAge(arr) {
+//     return arr.reduce((sum, item) => sum + item.age, 0) / arr.length;
+// }
+// let john = { name: "John", age: 25 };
+// let pete = { name: "Pete", age: 30 };
+// let mary = { name: "Mary", age: 29 };
+// let arr = [ john, pete, mary ];
+// alert( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28
+
+
 // Сортировка объектов
-var vasya = { name: "Вася", age: 23 };
-var masha = { name: "Маша", age: 18 };
-var vovochka = { name: "Вовочка", age: 6 };
+// var vasya = { name: "Вася", age: 23 };
+// var masha = { name: "Маша", age: 18 };
+// var vovochka = { name: "Вовочка", age: 6 };
 
-var people = [vasya, masha, vovochka];
+// var people = [vasya, masha, vovochka];
 
-people.sort((a, b) => {
-    return a['age'] - b['age'];
-})
+// people.sort((a, b) => {
+//     return a['age'] - b['age'];
+// })
 
 // теперь people: [vovochka, masha, vasya]
 // alert(people[0].age) // 6
@@ -154,7 +265,7 @@ function printReverseList(list) {
 
 
 // Отфильтровать анаграммы
-var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+// var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
 // Вернет первые вхождения
 function aclean(arr) {
     let tmpSort = [];
@@ -194,12 +305,12 @@ function aclean(arr) {
 // Оставить уникальные элементы массива
 function unique(arr) {
     let obj = {};
-    for (let i = 0; i < arr.length; i++) {
-        obj[arr[i]] = true;
+    for (let item of arr) {
+        obj[item] = true;
     }
     return Object.keys(obj);
 }
 var strings = ["кришна", "кришна", "харе", "харе",
     "харе", "харе", "кришна", "кришна", "8-()"
 ];
-alert(unique(strings));
+// alert(unique(strings));
