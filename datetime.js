@@ -102,11 +102,7 @@ function formatDate(date) {
         '' + d.getFullYear(),
         '0' + d.getHours(),
         '0' + d.getMinutes()
-    ];
-
-    for (var i = 0; i < d.length; i++) {
-        d[i] = d[i].slice(-2);
-    }
+    ].map(component => component.slice(-2));
 
     return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
 }

@@ -1,6 +1,6 @@
 // Сумма через замыкание
 function sum(a) {
-    return function(b) {
+    return function (b) {
         return a + b;
     }
 }
@@ -84,7 +84,7 @@ function inArray(arr) {
 function makeArmy() {
 
     var shooters = [];
-  
+
     // Первый способ - с помощью замыкания и вспомогательной функции
     // for (var i = 0; i < 10; i++) {
     //     var shooter = function(i) {
@@ -95,20 +95,34 @@ function makeArmy() {
 
     // Второй способ - с помощью замыкания и вызова функции на месте
     for (var i = 0; i < 10; i++)
-        (function(i) {
-            var shooter = function() {
-                alert( i );
+        (function (i) {
+            var shooter = function () {
+                alert(i);
             };
             shooters.push(shooter);
         })(i);
-  
-    return shooters;
-  }
-  
-  var army = makeArmy();
-  army[0](); // стрелок выводит 10, а должен 0
-  army[5]();
 
-        
-       
-         
+    return shooters;
+}
+
+var army = makeArmy();
+army[0](); // стрелок выводит 10, а должен 0
+army[5]();
+
+
+
+// Sort by field
+let users = [
+    { name: "John", age: 20, surname: "Johnson" },
+    { name: "Pete", age: 18, surname: "Peterson" },
+    { name: "Ann", age: 19, surname: "Hathaway" }
+];
+function byField(field) {
+    return (a, b) => a[field] > b[field] ? 1 : -1;
+}
+
+// users.sort(byField('name'));
+// users.forEach(user => alert(user.name)); // Ann, John, Pete
+
+// users.sort(byField('age'));
+// users.forEach(user => alert(user.name)); // Pete, Ann, John
